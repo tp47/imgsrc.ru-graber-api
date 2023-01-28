@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import categoriesModel, { ICategory } from "../model/categories";
+import categoriesModel from "../models/categories";
+import { ICategory } from "../utils/types";
 
 const categoriesController = {
   getAll: async (request: Request, response: Response): Promise<void> => {

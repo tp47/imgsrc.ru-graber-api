@@ -1,15 +1,7 @@
 import axios from "axios";
 import { JSDOM } from "jsdom";
-
-export interface ICategory {
-  title: string;
-  url: string;
-}
-
-const CATEGORIES_PAGE =
-  process.env.CATEGORIES_PAGE ?? "http://imgsrc.ru/main/search.php";
-const CATEGORIES_SELECTOR =
-  process.env.CATEGORIES_SELECTOR ?? ".h100 > div:nth-of-type(1) div";
+import { ICategory } from "../utils/types";
+import { CATEGORIES_PAGE, CATEGORIES_SELECTOR, PARSING_HOST } from "../utils/consts";
 
 const categoriesModel = {
   getAll: async (): Promise<ICategory[]> => {
@@ -25,7 +17,7 @@ const categoriesModel = {
       categories.push({
         title: category.textContent?.trim() ?? "Без названия",
         url: String().concat(
-          "http://imgsrc.ru",
+          PARSING_HOST,
           category.querySelector("a")?.getAttribute("href") ?? "/"
         ),
       });
